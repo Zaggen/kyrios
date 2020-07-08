@@ -4,6 +4,7 @@ export { default as init } from './core/init'
 export { default as makeModel } from './core/makeModel'
 export { default as makeEffects } from './utils/makeEffects'
 export { default as makeHooks } from './utils/makeHooks'
+export * from './hooks/useStoreContext'
 
 export type $Model<+T> = {|
   _nested: {},
