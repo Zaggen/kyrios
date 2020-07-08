@@ -1,0 +1,55 @@
+{
+  "env": {
+    "build": {
+      "presets":[
+        ["@babel/preset-env", { "modules": "commonjs"}], 
+        "@babel/preset-react"
+      ],
+      "plugins": [
+        "@babel/plugin-proposal-optional-chaining",
+        "@babel/plugin-transform-flow-strip-types",
+        "@babel/plugin-transform-react-jsx-source",
+        ["@babel/plugin-transform-runtime", {}],
+        [
+          "module-resolver",
+          {
+            "root": [
+              "./"
+            ],
+            "alias": {
+              "src": "./src",
+              "core": "./src/core",
+              "utils": "./src/utils",
+              "hooks": "./src/hooks"
+            }
+          }
+        ]
+      ]
+    },
+    "test": {
+      "presets":[
+        ["@babel/preset-env", { "modules": "commonjs"}], 
+        "@babel/preset-react"
+      ],
+      "plugins": [
+        "@babel/plugin-proposal-optional-chaining",
+        "@babel/plugin-transform-flow-strip-types",
+        ["@babel/plugin-transform-runtime", {}],
+        [
+          "module-resolver",
+          {
+            "root": [
+              "./"
+            ],
+            "alias": {
+              "src": "./src",
+              "core": "./src/core",
+              "utils": "./src/utils",
+              "hooks": "./src/hooks"
+            }
+          }
+        ]
+      ]
+    }
+  }
+}
