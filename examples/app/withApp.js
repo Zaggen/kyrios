@@ -1,6 +1,6 @@
 // @flow
 import React from 'react'
-import { StoreProvider } from '../../src/hooks/useStoreContext'
+import { StoreProvider } from '../../src'
 import store from './store'
 
 // $FlowFixMe
