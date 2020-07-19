@@ -1,6 +1,6 @@
 {
   "name": "kyrios",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "FE state management library built on top of redux",
   "main": ".dist/index.js",
   "author": "Luis Roman",
