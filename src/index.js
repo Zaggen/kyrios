@@ -3,6 +3,8 @@
 export { default as init } from './core/init'
 export { default as makeModel } from './core/makeModel'
 export { default as makeEffects } from './utils/makeEffects'
+export { default as makeReducers } from './utils/makeReducers'
+export { default as makeQueries } from './utils/makeQueries'
 export { default as makeHooks } from './utils/makeHooks'
 export * from './hooks/useStoreContext'
 
