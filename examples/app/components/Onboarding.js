@@ -1,9 +1,9 @@
 // @flow
 import React from 'react'
-import { useQuery, useStore } from '../hooks/store'
+import { useGetters, useStore } from '../hooks/store'
 
 const Onboarding = () => {
-  const [stepIndex] = useQuery(qry => qry.onboarding.navigation.index())
+  const [stepIndex] = useGetters(get => get.onboarding.navigation.index())
   const { onboarding } = useStore()
   const { prev, next } = onboarding.navigation
 
