@@ -154,7 +154,7 @@ function makeEventsManager({ parentCtx, ctx, model$ }) {
       // the actual redux notifier to know when the
       // reducer is done so we can have the same effect
       // as subscribing to the store but only notifying
-      // model changes to useQuery
+      // model changes to useGetters
       //const usubscribe = storeProxy.subscribe(() => {
       self._subscribers.forEach(subscriberCallback => {
         subscriberCallback(model)
@@ -187,7 +187,7 @@ function makeFetcher(model$) {
 }
 
 // This enables legacy models to call notify which is used
-// by the useQuery hook to get re-executed, since here we
+// by the useGetters hook to get re-executed, since here we
 // are using a reducer function we have to listen to all
 // the possible action types instead of a fine grain control
 // that we have over our custom reducers.

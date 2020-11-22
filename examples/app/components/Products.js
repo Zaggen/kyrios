@@ -1,9 +1,9 @@
 // @flow
 import React from 'react'
-import { useQuery } from '../hooks/store'
+import { useGetters } from '../hooks/store'
 
 const Products = () => {
-  const [state] = useQuery(qry => qry.products.state())
+  const [state] = useGetters(get => get.products.state())
 
   return state.status === 'loaded' ? (
     <ul>

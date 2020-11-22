@@ -11,18 +11,18 @@ function makeGetters(conf: {|
   const getters = reduce(
     conf.getters({}, {}, {}),
     (acc, val, key: string) => {
-      const proxiedQuery = (...args) => {
+      const proxiedGetter = (...args) => {
         const { ctx } = conf
         ctx.currentRootState = conf.parentCtx.store.getState()
         const rootState = ctx.currentRootState
         const modelState = get(rootState, ctx.modelPath)
         const curriedGetters = conf.getters(modelState, rootState, getters)
-        const query = curriedGetters[key]
+        const getter = curriedGetters[key]
         gettersRegister.notify(conf.model$)
 
-        return query(...args)
+        return getter(...args)
       }
-      acc[key] = proxiedQuery
+      acc[key] = proxiedGetter
       return acc
     },
     {},

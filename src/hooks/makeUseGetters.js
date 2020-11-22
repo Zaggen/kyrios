@@ -5,26 +5,26 @@ import isClientOrTestEnv from 'utils/isClientOrTestEnv'
 import { gettersRegister } from '../core/shared'
 import useCtx from './useLocalContext'
 
-export type $UseQuery<+Models> = <R: any>(
-  mapper: ($Qry<Models>) => R,
+export type $useGetters<+Models> = <R: any>(
+  mapper: ($Get<Models>) => R,
 ) => [R, {}]
 
-type $Qry<+Models> = $ReadOnly<
-  $ObjMap<$ParsedModels<Models>, <M>(model: M) => $ExtractFirstLevelQry<M>>, //
+type $Get<+Models> = $ReadOnly<
+  $ObjMap<$ParsedModels<Models>, <M>(model: M) => $ExtractFirstLevelGet<M>>, //
 >
 
 type $ParsedModels<+Models> = $Diff<Models, { getState: any, subscribe: any }>
-type $ExtractFirstLevelQry<+M> = $ReadOnly<
+type $ExtractFirstLevelGet<+M> = $ReadOnly<
   $PropertyType<$PropertyType<M, '_def'>, 'getters'>,
 >
 
-const makeUseQuery = <Models: { [name: string]: any }>(
+const makeUseGetters = <Models: { [name: string]: any }>(
   models: Models,
-): $UseQuery<Models> => {
+): $useGetters<Models> => {
   return mapper => {
     const [state, setState] = React.useState(() => {
       // We get the current state and subscribe
-      // to changes from the models used in the qry
+      // to changes from the models used in the get
       const modelsToObserve = []
       const subscriber = model => {
         modelsToObserve.push(model)
@@ -74,4 +74,4 @@ const makeUseQuery = <Models: { [name: string]: any }>(
   }
 }
 
-export default makeUseQuery
+export default makeUseGetters

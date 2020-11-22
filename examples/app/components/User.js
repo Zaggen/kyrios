@@ -1,9 +1,9 @@
 // @flow
 import React from 'react'
-import { useQuery, useCall } from '../hooks/store'
+import { useGetters, useCall } from '../hooks/store'
 
 const User = () => {
-  const [user] = useQuery(qry => qry.user.state())
+  const [user] = useGetters(get => get.user.state())
   const [signIn, { status }] = useCall(call => call.user.signIn)
 
   React.useEffect(() => {

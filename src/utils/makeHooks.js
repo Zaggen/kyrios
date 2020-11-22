@@ -1,21 +1,21 @@
 // @flow
-import makeUseQuery, { type $UseQuery as $QryHook } from '../hooks/makeUseQuery'
+import makeUseGetters, { type $useGetters as $GettersHook } from '../hooks/makeUseGetters'
 import makeUseCall, { type $UseCall as $CallHook } from '../hooks/makeUseCall'
 import { useStoreContext } from '../hooks/useStoreContext'
 
-export type $UseQuery<+M> = $QryHook<M>
+export type $useGetters<+M> = $GettersHook<M>
 export type $UseCall<+M> = $CallHook<M>
 
 const makeHooks = <Models: {}>(
   models: Models,
 ): ({|
-  useQuery: $Call<typeof makeUseQuery, Models>,
+  useGetters: $Call<typeof makeUseGetters, Models>,
   useCall: $Call<typeof makeUseCall, Models>,
   useStore: () => Models,
 |}) => {
   return {
     useCall: makeUseCall(models),
-    useQuery: makeUseQuery(models),
+    useGetters: makeUseGetters(models),
     // $FlowFixMe
     useStore: useStoreContext,
   }
