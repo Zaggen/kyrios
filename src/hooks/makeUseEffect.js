@@ -2,7 +2,7 @@
 import * as React from 'react'
 import useSafeState from './useSafeState'
 
-export type $UseCall<+Models> = <Method: any => Promise<void>>(
+export type $UseEffect<+Models> = <Method: any => Promise<void>>(
   fn: (models: $ReadOnly<Models>) => Method,
   inputs?: any[],
 ) => [Method, $State]
@@ -13,9 +13,9 @@ type $State = {|
   error: ?any,
 |}
 
-const makeUseCall = <Models: { [name: string]: any }>(
+const makeUseEffect = <Models: { [name: string]: any }>(
   models: Models,
-): $UseCall<Models> => {
+): $UseEffect<Models> => {
   return (mapper, inputs? = []) => {
     const asyncFn = mapper(models)
 
@@ -47,4 +47,4 @@ const makeUseCall = <Models: { [name: string]: any }>(
   }
 }
 
-export default makeUseCall
+export default makeUseEffect

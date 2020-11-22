@@ -1,20 +1,20 @@
 // @flow
 import makeUseGetters, { type $useGetters as $GettersHook } from '../hooks/makeUseGetters'
-import makeUseCall, { type $UseCall as $CallHook } from '../hooks/makeUseCall'
+import makeUseEffect, { type $UseEffect as $CallHook } from '../hooks/makeUseEffect'
 import { useStoreContext } from '../hooks/useStoreContext'
 
 export type $useGetters<+M> = $GettersHook<M>
-export type $UseCall<+M> = $CallHook<M>
+export type $UseEffect<+M> = $CallHook<M>
 
 const makeHooks = <Models: {}>(
   models: Models,
 ): ({|
   useGetters: $Call<typeof makeUseGetters, Models>,
-  useCall: $Call<typeof makeUseCall, Models>,
+  useEffect: $Call<typeof makeUseEffect, Models>,
   useStore: () => Models,
 |}) => {
   return {
-    useCall: makeUseCall(models),
+    useEffect: makeUseEffect(models),
     useGetters: makeUseGetters(models),
     // $FlowFixMe
     useStore: useStoreContext,

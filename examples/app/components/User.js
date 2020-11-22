@@ -1,10 +1,10 @@
 // @flow
 import React from 'react'
-import { useGetters, useCall } from '../hooks/store'
+import { useGetters, useEffect } from '../hooks/store'
 
 const User = () => {
   const [user] = useGetters(get => get.user.state())
-  const [signIn, { status }] = useCall(call => call.user.signIn)
+  const [signIn, { status }] = useEffect(call => call.user.signIn)
 
   React.useEffect(() => {
     signIn({ email: 'andy@test.com', password: '123' })
