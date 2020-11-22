@@ -9,7 +9,7 @@ export type $CartModel = $Model<{|
     add: (id: number) => $State,
     remove: (id: number) => $State,
   |},
-  queries: {|
+  getters: {|
     state: () => $State,
   |},
 |}>

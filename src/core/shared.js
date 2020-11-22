@@ -18,7 +18,7 @@ export const register: $Register = {
   },
 }
 
-export const queriesRegister = {
+export const gettersRegister = {
   _subscribers: [],
   subscribe(callback: Function) {
     this._subscribers.push(callback)

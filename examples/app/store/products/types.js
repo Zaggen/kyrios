@@ -29,7 +29,7 @@ export type $ProductsModel = $Model<{
   effects: {|
     fetch: () => Promise<void>,
   |},
-  queries: {|
+  getters: {|
     state: () => $State,
     data: () => ?$Data,
   |},

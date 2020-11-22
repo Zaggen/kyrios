@@ -25,7 +25,7 @@ const products = makeModel<$Models, 'products'>({
       }
     },
   }),
-  queries: state => ({
+  getters: state => ({
     state: () => state,
     data: () => state.data,
   }),

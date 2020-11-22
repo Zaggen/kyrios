@@ -3,7 +3,7 @@ import { snakeCase, extend, throttle } from 'lodash'
 import isClientOrTestEnv from 'utils/isClientOrTestEnv'
 import { type $MakeModel } from './types'
 import { register, INIT_ACTION } from './shared'
-import makeQueries from './makeQueries'
+import makeGetters from './makeGetters'
 import makeReducer from './makeReducer'
 import setUpListeners from './setUpListeners'
 
@@ -53,9 +53,9 @@ const makeModel: $MakeModel = <D: any>(def: D) => {
         enableReduxLegacyMode({ def, eventsManager })
       }
 
-      const queries: Object = def.queries
-        ? makeQueries({
-            queries: def.queries,
+      const getters: Object = def.getters
+        ? makeGetters({
+            getters: def.getters,
             model$,
             ctx,
             parentCtx,
@@ -66,7 +66,7 @@ const makeModel: $MakeModel = <D: any>(def: D) => {
       // all the methods required to make it work
       extend(model$, {
         actions,
-        ...queries,
+        ...getters,
         ...eventsManager,
         reducer: def.reducer || reducer,
         _initialized: true,

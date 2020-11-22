@@ -15,7 +15,7 @@ export type $MakeFullModel = <Models, K>(def: {|
   state: $ModelProp<Models, K, 'state'>,
   reducers: $Reducers<Models, K>,
   effects: $Effects<Models, K>,
-  queries: $Queries<Models, K>,
+  getters: $Getters<Models, K>,
   listenTo?: $FullModelListeners<$Model<Models, K>>,
   onMount?: $OnMount<Models, K>,
 |}) => $InitializedModel<$Model<Models, K>>
@@ -37,7 +37,7 @@ type $FullModelListeners<M> = $List<
 export type $MakePureModel = <Models: {}, K>(def: {|
   state: $ModelProp<Models, K, 'state'>,
   reducers: $Reducers<Models, K>,
-  queries: $Queries<Models, K>,
+  getters: $Getters<Models, K>,
   listenTo?: $FullModelListeners<$Model<Models, K>>,
   onMount?: $OnMount<Models, K>,
 |}) => $InitializedPureModel<$Model<Models, K>>
@@ -68,11 +68,11 @@ type $Effects<Models, K> = (
   store: $Store<Models>,
 ) => $ModelProp<Models, K, 'effects'>
 
-type $Queries<+Models, +K> = (
+type $Getters<+Models, +K> = (
   state: $ElementType<$ElementType<Models, K>, 'state'>,
   rootState: $ReadOnly<$ObjMap<Models, <M>(m: M) => $PropertyType<M, 'state'>>>,
-  qry: $ReadOnly<$ObjMap<Models, <M>(m: M) => $PropertyType<M, 'queries'>>>,
-) => $ReadOnly<$ModelProp<Models, K, 'queries'>>
+  get: $ReadOnly<$ObjMap<Models, <M>(m: M) => $PropertyType<M, 'getters'>>>,
+) => $ReadOnly<$ModelProp<Models, K, 'getters'>>
 
 type $OnMount<Models, K> = (
   self: $InitializedModel<$Model<Models, K>>,
@@ -86,7 +86,7 @@ type $InitializedModel<T> = {|
   ...$Exact<$PropertyType<T, '_nested'>>,
   ...$Exact<$PropertyType<T, 'reducers'>>,
   ...$Exact<$PropertyType<T, 'effects'>>,
-  ...$Exact<$PropertyType<T, 'queries'>>,
+  ...$Exact<$PropertyType<T, 'getters'>>,
 |}
 
 type $InitializedPureModel<T> = {|
@@ -94,7 +94,7 @@ type $InitializedPureModel<T> = {|
   +_def: T, // Used by other internal types
   +_nested: $PropertyType<T, '_nested'>, // Used by other internal types
   ...$Exact<$PropertyType<T, 'reducers'>>,
-  ...$Exact<$PropertyType<T, 'queries'>>,
+  ...$Exact<$PropertyType<T, 'getters'>>,
 |}
 
 type $List<+T> = $ReadOnlyArray<T>

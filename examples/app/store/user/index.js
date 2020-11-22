@@ -20,7 +20,7 @@ const user = makeModel<$Models, 'user'>({
       }
     },
   }),
-  queries: state => ({
+  getters: state => ({
     state: () => state,
     name: () => state?.name,
   }),

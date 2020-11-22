@@ -33,7 +33,7 @@ const coupon = makeModel<$Models, 'onboarding', 'coupon'>({
       }
     },
   }),
-  queries: state => ({
+  getters: state => ({
     state: () => state,
   }),
 })

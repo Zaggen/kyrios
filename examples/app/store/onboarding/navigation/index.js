@@ -11,7 +11,7 @@ const navigation = makeModel<$Models, 'navigation'>({
     next: () => ({ ...state, index: state.index + 1 }),
     prev: () => ({ ...state, index: state.index - 1 }),
   }),
-  queries: state => ({
+  getters: state => ({
     state: () => state,
     index: () => state.index,
   }),

@@ -1,16 +1,16 @@
 // @flow
-const makeQueries = <Finders: {}>(
-  queries: Finders,
+const makeGetters = <Finders: {}>(
+  getters: Finders,
 ): ((
   state: Object,
   rootState: Object,
 ) => $ObjMap<Finders, <M>(method: M) => $Call<M, any, any>>) => {
-  const keys = Object.keys(queries)
+  const keys = Object.keys(getters)
   return (state, rootState) =>
     keys.reduce((obj, key) => {
-      obj[key] = queries[key](state, rootState)
+      obj[key] = getters[key](state, rootState)
       return obj
     }, {})
 }
 
-export default makeQueries
+export default makeGetters

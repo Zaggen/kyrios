@@ -30,7 +30,7 @@ export type $CouponModel = $Model<{
   effects: {|
     validate: (code: string) => Promise<void>,
   |},
-  queries: {|
+  getters: {|
     state: () => $State,
   |},
 }>

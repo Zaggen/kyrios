@@ -9,7 +9,7 @@ export type $ToasterModel = $Model<{|
     pushMsg: (msg: string) => $State,
     popMsg: () => $State,
   |},
-  queries: {|
+  getters: {|
     state: () => $State,
   |},
 |}>

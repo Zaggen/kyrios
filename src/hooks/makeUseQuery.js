@@ -2,7 +2,7 @@
 import * as React from 'react'
 import { isEqual } from 'lodash'
 import isClientOrTestEnv from 'utils/isClientOrTestEnv'
-import { queriesRegister } from '../core/shared'
+import { gettersRegister } from '../core/shared'
 import useCtx from './useLocalContext'
 
 export type $UseQuery<+Models> = <R: any>(
@@ -15,7 +15,7 @@ type $Qry<+Models> = $ReadOnly<
 
 type $ParsedModels<+Models> = $Diff<Models, { getState: any, subscribe: any }>
 type $ExtractFirstLevelQry<+M> = $ReadOnly<
-  $PropertyType<$PropertyType<M, '_def'>, 'queries'>,
+  $PropertyType<$PropertyType<M, '_def'>, 'getters'>,
 >
 
 const makeUseQuery = <Models: { [name: string]: any }>(
@@ -31,12 +31,12 @@ const makeUseQuery = <Models: { [name: string]: any }>(
       }
       // We subscribe before we call any query
       //  which would trigger the notification of subscribers.
-      queriesRegister.subscribe(subscriber)
+      gettersRegister.subscribe(subscriber)
       const data = mapper(models)
       // We don't want to keep subscribed so we
       // unsubscribe inmediately since we have
       // the data in modelsToObserve
-      queriesRegister.unsubscribe(subscriber)
+      gettersRegister.unsubscribe(subscriber)
 
       return {
         modelsToObserve,

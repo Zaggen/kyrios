@@ -12,7 +12,7 @@ export type $NavigationModel = $Model<{
     next: () => $State,
     prev: () => $State,
   |},
-  queries: {|
+  getters: {|
     state: () => $State,
   |},
 }>

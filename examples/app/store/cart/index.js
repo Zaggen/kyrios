@@ -13,7 +13,7 @@ const cart = makeModel<$Models, 'cart'>({
       return newState
     },
   }),
-  queries: state => ({
+  getters: state => ({
     state: () => state,
   }),
 })

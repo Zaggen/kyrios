@@ -22,7 +22,7 @@ export type $UserModel = $Model<{
   effects: {|
     signIn: (payload: {| +email: string, +password: string |}) => Promise<void>,
   |},
-  queries: {|
+  getters: {|
     state: () => $State,
     name: () => ?$PropertyType<$User, 'name'>,
   |},

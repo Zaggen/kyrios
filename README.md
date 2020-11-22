@@ -25,9 +25,9 @@ const user = makeModel<$Models, 'user'>({
       }
     },
   }),
-  // Queries are equivalent to redux selectors, but without
+  // Getters are equivalent to redux selectors, but without
   // the need to manually pass them the state at runtime
-  queries: state => ({
+  getters: state => ({
     state: () => state,
   }),
 })

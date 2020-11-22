@@ -23,7 +23,7 @@ const makeNestedModel = <
   resetState: (payload?: any) => Object,
   models: $PropertyType<Def, 'models'>,
   _init: () => void,
-  _def: { queries: $PropertyType<Def, 'models'> },
+  _def: { getters: $PropertyType<Def, 'models'> },
 |}) => {
   const nestedModel$ = {
     _name: (null: ?string),

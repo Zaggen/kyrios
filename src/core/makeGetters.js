@@ -1,24 +1,24 @@
 // @flow
 import { reduce, get } from 'lodash'
-import { queriesRegister } from './shared'
+import { gettersRegister } from './shared'
 
-function makeQueries(conf: {|
-  queries: any,
+function makeGetters(conf: {|
+  getters: any,
   model$: any,
   ctx: any,
   parentCtx: { store: any },
 |}) {
-  const queries = reduce(
-    conf.queries({}, {}, {}),
+  const getters = reduce(
+    conf.getters({}, {}, {}),
     (acc, val, key: string) => {
       const proxiedQuery = (...args) => {
         const { ctx } = conf
         ctx.currentRootState = conf.parentCtx.store.getState()
         const rootState = ctx.currentRootState
         const modelState = get(rootState, ctx.modelPath)
-        const curriedQueries = conf.queries(modelState, rootState, queries)
-        const query = curriedQueries[key]
-        queriesRegister.notify(conf.model$)
+        const curriedGetters = conf.getters(modelState, rootState, getters)
+        const query = curriedGetters[key]
+        gettersRegister.notify(conf.model$)
 
         return query(...args)
       }
@@ -27,7 +27,7 @@ function makeQueries(conf: {|
     },
     {},
   )
-  return queries
+  return getters
 }
 
-export default makeQueries
+export default makeGetters
